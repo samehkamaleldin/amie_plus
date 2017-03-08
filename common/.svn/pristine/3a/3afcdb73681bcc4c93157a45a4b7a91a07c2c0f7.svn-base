@@ -1,0 +1,14 @@
+package telecom.util.collections;
+
+import java.util.Comparator;
+
+import javatools.datatypes.ByteString;
+
+public class ByteStringCmp implements Comparator<ByteString> {
+
+	@Override
+	public int compare(ByteString o1, ByteString o2) {
+		return o1.toString().compareTo(o2.toString());
+	}
+
+}

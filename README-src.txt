@@ -1,0 +1,3 @@
+This package contains the source code of the AMIE tool for rule mining on ontological knowledge bases. It includes also the source code of the Javatools library (https://www.mpi-inf.mpg.de/departments/databases-and-information-systems/research/yago-naga/javatools/) on which AMIE depends as well as the binaries of the Apache Commons library.
+
+The AMIE algorithm is implemented in the amie.mining.AMIE class. You can run this class without arguments to see the different options it supports. AMIE assumes ontologies are given in the TSV format, where each line is a fact of the form Subject<TAB>Relation<TAB>Object.

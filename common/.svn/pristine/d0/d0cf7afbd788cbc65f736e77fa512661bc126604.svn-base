@@ -1,0 +1,60 @@
+package telecom.util.collections;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Random;
+
+import javatools.datatypes.IntHashMap;
+
+public class Collections {
+
+	/**
+	 * Applies reservoir sampling to a collection of items: http://www.geeksforgeeks.org/reservoir-sampling/
+	 * @param someCollection
+	 * @param sampleSize
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> Collection<T> reservoirSampling(Collection<T> someCollection, int sampleSize) {
+		//Now sample them
+		Collection<T> result = new ArrayList<>(sampleSize);	
+		ArrayList<T> resultArrayList = (ArrayList<T>)result;
+		if(someCollection.size() <= sampleSize){
+			return someCollection;
+		}else{
+			Object[] candidates = someCollection.toArray();
+			int i;
+			Random r = new Random();
+			for(i = 0; i < sampleSize; ++i){				
+				result.add((T)candidates[i]);
+			}
+			
+			while(i < candidates.length){
+			    int rand = r.nextInt(i);
+			    if(rand < sampleSize){
+			    	//Pick a random number in the reservoir.
+			    	resultArrayList.set(r.nextInt(sampleSize), (T)candidates[i]);
+			    }
+			    ++i;
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Return the full string representation of a IntHashMap
+	 * @param histogram
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static <K> String toString(IntHashMap<K> histogram) {
+		if (histogram.isEmpty())
+			return ("{}");
+		StringBuilder b = new StringBuilder("{");
+		for (K key : histogram.keys()) {
+			b.append(key).append('=').append(histogram.get(key)).append(", ");
+		}
+		b.setLength(b.length() - 2);
+		return (b.append("}").toString());
+	}
+}
